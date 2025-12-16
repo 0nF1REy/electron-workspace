@@ -16,13 +16,13 @@
     "name": "Alan Ryan da Silva Domingues",
     "email": "alanryan619@gmail.com"
   },
-  "homepage": "https://github.com/0nF1REy/electron-applications",
+  "homepage": "https://github.com/0nF1REy/electron-workspace",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0nF1REy/electron-applications.git"
+    "url": "https://github.com/0nF1REy/electron-workspace.git"
   },
   "bugs": {
-    "url": "https://github.com/0nF1REy/electron-applications/issues"
+    "url": "https://github.com/0nF1REy/electron-workspace/issues"
   },
   "license": "MIT",
   "devDependencies": {

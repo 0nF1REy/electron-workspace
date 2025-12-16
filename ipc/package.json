@@ -21,13 +21,13 @@
     "email": "alanryan619@gmail.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/0nF1REy/electron-applications",
+  "homepage": "https://github.com/0nF1REy/electron-workspace",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0nF1REy/electron-applications.git"
+    "url": "https://github.com/0nF1REy/electron-workspace.git"
   },
   "bugs": {
-    "url": "https://github.com/0nF1REy/electron-applications/issues"
+    "url": "https://github.com/0nF1REy/electron-workspace/issues"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.9.0",
