@@ -97,16 +97,22 @@
         // 3. Define o que acontece ao clicar na notificação
         options.OnClick = async () =>
         {
-            // O InvokeAsync garante que a interface do Blazor atualize
-            await InvokeAsync(() =>
-            {
-                notificationStatus = "Você clicou na notificação!";
-                StateHasChanged();
-            });
-
-            // Traz a janela para frente
             var mainWindow = Electron.WindowManager.BrowserWindows.FirstOrDefault();
-            mainWindow?.Show();
+            
+            if (mainWindow != null)
+            {
+                // Traz a janela para frente primeiro
+                mainWindow.Show();
+
+                // Cria e exibe o Dialog
+                var msgOptions = new MessageBoxOptions("Você clicou na notificação!")
+                {
+                    Type = MessageBoxType.info,
+                    Title = "Evento de Clique"
+                };
+
+                await Electron.Dialog.ShowMessageBoxAsync(mainWindow, msgOptions);
+            }
         };
 
         // 4. Exibe (Sem await, pois é fire-and-forget)
