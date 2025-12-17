@@ -1,0 +1,122 @@
+@page "/Dialogs"
+@using System.IO
+@using ElectronNET.API 
+@using ElectronNET.API.Entities
+@inject IFilesService filesService
+
+@rendermode InteractiveServer
+
+<div class="container-fluid mt-4">
+    <h2 class="mb-4">Gerenciamento de Arquivos e Diálogos</h2>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <strong>Editor de Conteúdo</strong>
+                </div>
+                <div class="card-body">
+                    <textarea class="form-control" 
+                              rows="6" 
+                              placeholder="Digite seu conteúdo aqui..." 
+                              @bind="@textContent">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- Message Box -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Alerta</h5>
+                    <button class="btn btn-success w-100" @onclick="ShowMessageBoxAsync">
+                        Exibir Mensagem
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save File -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Salvar</h5>
+                    <button class="btn btn-warning w-100 mb-2" @onclick="ShowSaveFileDialogAsync">
+                        Salvar Como...
+                    </button>
+                    @if (!string.IsNullOrEmpty(filePath))
+                    {
+                        <div class="alert alert-light p-1 small text-break">@filePath</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Open File -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Abrir</h5>
+                    <button class="btn btn-primary w-100 mb-2" @onclick="ShowOpenFileDialogAsync">
+                        Selecionar Arquivo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code 
+{
+    string filePath = string.Empty; 
+    string textContent = string.Empty; 
+    string[] selectedFiles = new string[0]; 
+
+    async Task ShowMessageBoxAsync()
+    {
+        await Electron.Dialog.ShowMessageBoxAsync("Olá! O botão está funcionando.");
+    }
+
+    async Task ShowSaveFileDialogAsync()
+    {
+        var options = new SaveDialogOptions
+        {
+            Title = "Escolha onde salvar o arquivo",
+            Filters = new[] 
+            {
+                new FileFilter { Name = "Arquivos de Texto", Extensions = new[] { "txt", "json", "xml" } }
+            }
+        };
+
+        var mainWindow = Electron.WindowManager.BrowserWindows.FirstOrDefault();
+        
+        filePath = await Electron.Dialog.ShowSaveDialogAsync(mainWindow, options); 
+
+        if(!string.IsNullOrWhiteSpace(filePath))
+        {
+            filesService.WriteToFile(filePath, textContent);
+        }
+    }
+
+    async Task ShowOpenFileDialogAsync()
+    {
+        var options = new OpenDialogOptions
+        {
+            Title = "Selecione um arquivo",
+            Properties = new[] { OpenDialogProperty.openFile }
+        };
+
+        var mainWindow = Electron.WindowManager.BrowserWindows.FirstOrDefault();
+
+        selectedFiles = await Electron.Dialog.ShowOpenDialogAsync(mainWindow, options); 
+
+        if(selectedFiles != null && selectedFiles.Any())
+        {
+            textContent = filesService.ReadFromFile(selectedFiles[0]);
+        }
+    }
+}
