@@ -5,29 +5,26 @@
 @inject IWebHostEnvironment HostEnvironment
 @rendermode InteractiveServer
 
-<PageTitle>Notificações e Alertas</PageTitle>
+<PageTitle>Notificações Push</PageTitle>
 
-<div class="container-fluid mt-4">
-    <h2 class="mb-4">Notificações e Alertas</h2>
-
-    <div class="row">
-        <!-- Coluna 1: Notificações Nativas -->
-        <div class="col-md-6">
-            <div class="card h-100">
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <strong>Notificação de Sistema</strong>
+                    <h5 class="mb-0">Notificação de Sistema</h5>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted">Gera uma notificação nativa no canto da tela.</p>
+                    <p class="text-muted">Gera uma notificação nativa do sistema operacional (Windows/Linux/Mac).</p>
                     
                     <div class="mb-3">
-                        <label class="form-label">Título</label>
-                        <input type="text" class="form-control" @bind="notifTitle" />
+                        <label class="form-label fw-bold">Título</label>
+                        <input type="text" class="form-control" @bind="notifTitle" placeholder="Ex: Tarefa concluída" />
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Mensagem</label>
-                        <input type="text" class="form-control" @bind="notifBody" />
+                        <label class="form-label fw-bold">Mensagem</label>
+                        <input type="text" class="form-control" @bind="notifBody" placeholder="Ex: O processo finalizou com sucesso." />
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="ShowNotificationAsync">
@@ -37,30 +34,7 @@
                     @if (!string.IsNullOrEmpty(notificationStatus))
                     {
                         <div class="alert alert-info mt-3 p-2 small">
-                            <i class="bi bi-info-circle"></i> @notificationStatus
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-
-        <!-- Coluna 2: MessageBox Avançado -->
-        <div class="col-md-6">
-            <div class="card h-100">
-                <div class="card-header bg-danger text-white">
-                    <strong>Caixa de Diálogo (Perguntas)</strong>
-                </div>
-                <div class="card-body">
-                    <p class="text-muted">Faz uma pergunta ao usuário e aguarda a resposta.</p>
-
-                    <button class="btn btn-outline-danger w-100 mb-3" @onclick="ShowAdvancedMessageBoxAsync">
-                        Fazer Pergunta
-                    </button>
-
-                    @if (!string.IsNullOrEmpty(dialogResult))
-                    {
-                        <div class="alert alert-warning mt-3 p-2 small">
-                            <strong>Resultado:</strong> @dialogResult
+                            @notificationStatus
                         </div>
                     }
                 </div>
@@ -73,38 +47,30 @@
     string notifTitle = "Olá Blazor!";
     string notifBody = "Esta é uma notificação do sistema.";
     string notificationStatus = "";
-    string dialogResult = "";
 
     async Task ShowNotificationAsync()
     {
-        // 1. Configura o caminho do ícone
         string rootPath = HostEnvironment.WebRootPath;
         string iconPath = Path.Combine(rootPath, "favicon.png");
 
-        // Se não achar o PNG, tenta o ICO
         if (!File.Exists(iconPath))
         {
             string icoPath = Path.Combine(rootPath, "favicon.ico");
             if (File.Exists(icoPath)) iconPath = icoPath;
         }
 
-        // 2. Cria as opções
         var options = new NotificationOptions(notifTitle, notifBody)
         {
             Icon = iconPath
         };
 
-        // 3. Define o que acontece ao clicar na notificação
         options.OnClick = async () =>
         {
             var mainWindow = Electron.WindowManager.BrowserWindows.FirstOrDefault();
             
             if (mainWindow != null)
             {
-                // Traz a janela para frente primeiro
                 mainWindow.Show();
-
-                // Cria e exibe o Dialog
                 var msgOptions = new MessageBoxOptions("Você clicou na notificação!")
                 {
                     Type = MessageBoxType.info,
@@ -112,38 +78,16 @@
                 };
 
                 await Electron.Dialog.ShowMessageBoxAsync(mainWindow, msgOptions);
+
+                await InvokeAsync(() => 
+                {
+                    notificationStatus = ""; 
+                    StateHasChanged();
+                });
             }
         };
 
-        // 4. Exibe (Sem await, pois é fire-and-forget)
         Electron.Notification.Show(options);
-        
-        notificationStatus = "Notificação enviada. Verifique sua área de trabalho.";
-    }
-
-    async Task ShowAdvancedMessageBoxAsync()
-    {
-        var options = new MessageBoxOptions("O que você deseja fazer com este arquivo?")
-        {
-            Type = MessageBoxType.question,
-            Title = "Decisão Necessária",
-            Buttons = new[] { "Salvar", "Descartar", "Cancelar" },
-            Detail = "Essa ação não poderá ser desfeita posteriormente.",
-            NoLink = true
-        };
-
-        var mainWindow = Electron.WindowManager.BrowserWindows.FirstOrDefault();
-        
-        // Exibe a caixa e espera o clique (await)
-        var response = await Electron.Dialog.ShowMessageBoxAsync(mainWindow, options);
-
-        // Processa a resposta baseada no índice do botão (0, 1, 2)
-        dialogResult = response.Response switch
-        {
-            0 => "Botão SALVAR clicado.",
-            1 => "Botão DESCARTAR clicado.",
-            2 => "Operação CANCELADA.",
-            _ => "Janela fechada sem ação."
-        };
+        notificationStatus = "Notificação enviada. Aguarde aparecer no canto da tela.";
     }
 }
