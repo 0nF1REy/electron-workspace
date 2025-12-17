@@ -1,0 +1,65 @@
+@page "/message-boxes"
+@using ElectronNET.API
+@using ElectronNET.API.Entities
+@rendermode InteractiveServer
+
+<PageTitle>Caixas de Diálogo</PageTitle>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Caixas de Diálogo (Perguntas)</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Simula uma decisão crítica do usuário (Salvar, Descartar, Cancelar).</p>
+
+                    <div class="alert alert-light border">
+                        <strong>Cenário:</strong> O usuário tentou fechar um arquivo sem salvar.
+                    </div>
+
+                    <button class="btn btn-outline-danger w-100 mb-3" @onclick="ShowAdvancedMessageBoxAsync">
+                        Simular Pergunta de Fechamento
+                    </button>
+
+                    @if (!string.IsNullOrEmpty(dialogResult))
+                    {
+                        <div class="alert alert-warning mt-3 p-2 text-center">
+                            <strong>Resultado da escolha:</strong> <br>
+                            @dialogResult
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    string dialogResult = "";
+
+    async Task ShowAdvancedMessageBoxAsync()
+    {
+        var options = new MessageBoxOptions("O que você deseja fazer com as alterações não salvas?")
+        {
+            Type = MessageBoxType.question,
+            Title = "Alterações Pendentes",
+            Buttons = new[] { "Salvar", "Descartar", "Cancelar" },
+            Detail = "Se você descartar, as alterações serão perdidas permanentemente.",
+            NoLink = true
+        };
+
+        var mainWindow = Electron.WindowManager.BrowserWindows.FirstOrDefault();
+        
+        var response = await Electron.Dialog.ShowMessageBoxAsync(mainWindow, options);
+
+        dialogResult = response.Response switch
+        {
+            0 => "O usuário escolheu SALVAR.",
+            1 => "O usuário escolheu DESCARTAR.",
+            2 => "Operação CANCELADA.",
+            _ => "Janela fechada sem ação."
+        };
+    }
+}
