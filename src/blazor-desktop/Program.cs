@@ -20,9 +20,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
-
 app.UseAntiforgery();
-
 app.MapStaticAssets();
 
 app.MapRazorComponents<BlazorApp>()
@@ -32,6 +30,62 @@ if (HybridSupport.IsElectronActive)
 {
     app.Lifetime.ApplicationStarted.Register(async () =>
     {
+        // ---------------------
+        // 1. DEFINIÇÃO DO MENU
+        // ---------------------
+        var menu = new MenuItem[]
+        {
+            new MenuItem
+            {
+                Label = "Arquivo",
+                Type = MenuType.submenu,
+                Submenu = new MenuItem[]
+                {
+                    new MenuItem
+                    {
+                        Label = "Novo",
+                        Click = async () => await Electron.Dialog.ShowMessageBoxAsync("Você clicou em Novo!")
+                    },
+                    new MenuItem
+                    {
+                        Type = MenuType.separator,
+                    },
+                    new MenuItem
+                    {
+                        Label = "Sair",
+                        Role = MenuRole.quit
+                    }
+                }
+            },
+            new MenuItem 
+            {
+                Label = "Editar",
+                Submenu = new MenuItem[]
+                {
+                    new MenuItem
+                    {
+                        Label = "Teste",
+                        Click = async () => await Electron.Dialog.ShowMessageBoxAsync("Teste clicado!"),
+                        Accelerator = "CmdOrCtrl+T"
+                    }
+                }
+            },
+            new MenuItem
+            {
+                Label = "Exibir",
+                Submenu = new MenuItem[]
+                {
+                    new MenuItem { Label = "Recarregar", Role = MenuRole.reload },
+                    new MenuItem { Label = "Ferramentas Dev", Role = MenuRole.toggledevtools }
+                }
+            }
+        };
+
+        Electron.Menu.SetApplicationMenu(menu);
+
+        // ---------------------
+        // 2. CRIAÇÃO DA JANELA
+        // ---------------------
         var options = new BrowserWindowOptions 
         { 
             Show = false 
