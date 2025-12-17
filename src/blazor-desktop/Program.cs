@@ -3,16 +3,13 @@ using BlazorApp = blazor_desktop.Components.App;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Electron precisa saber que está rodando com ele
 builder.WebHost.UseElectron(args);
 
-// Adicionado os serviços ao contêiner.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 var app = builder.Build();
 
-// Configurado o pipeline de requisições HTTP.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
@@ -28,10 +25,13 @@ app.MapStaticAssets();
 app.MapRazorComponents<BlazorApp>()
     .AddInteractiveServerRenderMode();
 
-// Electron “entra em ação”
 if (HybridSupport.IsElectronActive)
 {
-    await Electron.WindowManager.CreateWindowAsync();
+    // Garante que a janela só abre quando o servidor estiver ouvindo na porta
+    app.Lifetime.ApplicationStarted.Register(async () =>
+    {
+        await Electron.WindowManager.CreateWindowAsync();
+    });
 }
 
 await app.RunAsync();
