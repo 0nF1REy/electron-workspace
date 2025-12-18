@@ -1,14 +1,17 @@
 <!doctype html>
-<html>
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>Teste de Threads - Electron</title>
   </head>
   <body>
-    <div id="counter">0</div>
-    <button id="default">Click me</button>
-    <button id="main-thread">Work on main thread</button>
-    <button id="worker-thread">Work on worker thread</button>
+    <div id="counter" style="font-size: 2rem; font-weight: bold">0</div>
+
+    <button id="default">Incrementar Contador</button>
+    <hr />
+    <button id="main-thread">Executar na Main Thread (Trava a UI)</button>
+    <button id="worker-thread">Executar na Worker Thread (Background)</button>
+
     <script type="module" src="/src/renderer.ts"></script>
   </body>
 </html>

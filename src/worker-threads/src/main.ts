@@ -35,7 +35,7 @@ app.on("window-all-closed", () => {
   }
 });
 
-ipcMain.on("start_heavy_counter", (ev, data) => {
+ipcMain.on("start_heavy_counter", () => {
   let counter = 0;
   while (counter < 500000) {
     console.log(counter);
@@ -43,22 +43,18 @@ ipcMain.on("start_heavy_counter", (ev, data) => {
   }
 });
 
-ipcMain.on("start_heavy_worker_counter", (ev, data) => {
-  const worker = new Worker("./src/workers/counter.worker.cjs", {
-    workerData: {
-      testData: "hello world",
-    },
+ipcMain.on("start_heavy_worker_counter", () => {
+  const workerPath = path.join(__dirname, "counter.worker.js");
+
+  const worker = new Worker(workerPath, {
+    workerData: { testData: "hello world" },
   });
 
-  worker.on("message", (msg) => {
-    console.log("msg", msg);
-  });
-  worker.on("error", (err) => {
-    console.log("err", err);
-  });
-  worker.on("exit", (code) => {
-    console.log("code", code);
-  });
+  worker.on("message", (msg) => console.log("Resultado do Worker:", msg));
+  worker.on("error", (err) => console.error("Erro no Worker:", err));
+  worker.on("exit", (code) =>
+    console.log("Worker finalizado com código:", code)
+  );
 });
 
 app.on("activate", () => {
