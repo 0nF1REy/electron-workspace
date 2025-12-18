@@ -1,0 +1,31 @@
+@page "/about"
+@using ElectronNET.API
+@inject IJSRuntime JSRuntime 
+@rendermode InteractiveServer
+
+<PageTitle>Sobre</PageTitle>
+
+<div class="container-fluid d-flex flex-column align-items-center" style="height: 100vh;">
+
+    <p class="text-muted mb-4">Versão 1.0.0</p>
+
+    <div class="card p-3 shadow-sm bg-light w-100 border-0 text-center">
+        <p class="small mb-1">
+            Desenvolvido com <strong>.NET</strong> e <strong>Blazor</strong>.
+        </p>
+        <p class="small text-muted m-0">
+            &copy; 2025 Alan Ryan da Silva Domingues. Todos os direitos reservados.
+        </p>
+    </div>
+
+    <button class="btn btn-secondary mt-4 w-50" @onclick="CloseWindow">
+        Fechar
+    </button>
+</div>
+
+@code {
+    async Task CloseWindow()
+    {
+        await JSRuntime.InvokeVoidAsync("window.close");
+    }
+}

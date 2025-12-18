@@ -1,0 +1,55 @@
+@page "/"
+@using ElectronNET.API 
+@using ElectronNET.API.Entities
+@using blazor_desktop.Components.Layout 
+@rendermode InteractiveServer
+
+<PageTitle>Início</PageTitle>
+
+<h1>Olá, mundo!</h1>
+
+<p>Bem-vindo ao seu novo aplicativo.</p>
+
+<SurveyPrompt Title="Como o Blazor está funcionando para você?" />
+
+<button class="btn btn-success" @onclick="OpenAboutWindow">
+    Sobre o aplicativo
+</button>
+
+@code {
+    private static BrowserWindow? _aboutWindow;
+
+    async Task OpenAboutWindow()
+    {
+        if (_aboutWindow != null)
+        {
+            _aboutWindow.Show();
+            _aboutWindow.Focus();
+            return;
+        }
+
+        string url = $"http://localhost:{BridgeSettings.WebPort}/about";
+
+        var options = new BrowserWindowOptions
+        {
+            Width = 800,
+            Height = 600,
+            AutoHideMenuBar = true,
+            AlwaysOnTop = true, 
+            Resizable = false,
+            Minimizable = false,
+            @*Fullscreen = true*@
+        };
+
+        _aboutWindow = await Electron.WindowManager.CreateWindowAsync(options, url);
+
+        // Limpa a referência quando fechar
+        if (_aboutWindow != null)
+        {
+            _aboutWindow.OnClosed += () => 
+            {
+                _aboutWindow = null;
+            };
+        }
+    }
+}
