@@ -1,5 +1,5 @@
 <h1 align="center">
-   Electron Applications
+   Electron - Workspace 
 </h1>
 
 <div align="center">
@@ -9,142 +9,59 @@
 
 </div>
 
-## 📖 Descrição
+## 🧭 Guia de Navegação (Índice)
 
-Este repositório contém diversas aplicações desenvolvidos com Electron, cada um com propósitos e tecnologias variadas. Abaixo está uma visão geral de cada aplicação presente na pasta principal.
+- **[📖 Descrição](#descricao)**
+- **[🚀 Projetos](#projetos)**
+- **[📥 Clonar o Repositório](#clonar-repositorio)**
+- **[⚙️ Como executar os projetos](#como-executar)**
+- **[👤 Sobre o Desenvolvedor](#sobre-o-desenvolvedor)**
+- **[📚 Recursos Adicionais](#recursos-adicionais)**
+- **[📜 Licença](#licenca)**
 
-## Índice
+## 📖 Descrição <a name="descricao"></a>
 
-- [image-resizer](#image-resizer)
-- [ipc](#ipc)
-- [meu-hello-electron](#meu-hello-electron)
-- [my-clock-app](#my-clock-app)
-- [my-electron-app](#my-electron-app)
-- [my-note-app](#my-note-app)
-- [my-pomodoro-app](#my-pomodoro-app)
-- [neo-browser](#neo-browser)
-- [pressound](#pressound)
-- [react-vite-starter](#react-vite-starter)
-- [resonus](#resonus)
-- [screen-capturer](#screen-capturer)
-- [tuturu-timer](#tuturu-timer)
-- [user-lite](#user-lite)
+Este repositório contém diversas aplicações desenvolvidos com Electron, cada um com propósitos e tecnologias variadas.
 
----
+## 🚀 Projetos <a name="projetos"></a>
 
-## image-resizer
+|  |
+|--------|
+| image-resizer |
+| ipc |
+| meu-hello-electron |
+| my-clock-app |
+| my-electron-app |
+| my-note-app |
+| my-pomodoro-app |
+| neo-browser |
+| pressound |
+| react-vite-starter |
+| resonus |
+| screen-capturer |
+| tuturu-timer |
+| user-lite |
 
-Aplicativo Electron para redimensionamento de imagens. Possui interface gráfica, suporte a múltiplos formatos e ícones para diferentes sistemas operacionais.
+## 📥 Clonar o Repositório <a name="clonar-repositorio"></a>
 
-- **Principais arquivos:** `main.js`, `preload.js`, `renderer/index.html`, `renderer/scripts/renderer.js`
-- **Recursos:** Redimensionamento de imagens, interface amigável, ícones customizados.
+Para obter uma cópia local do workspace, execute:
 
-## ipc
+```bash
+git clone https://github.com/0nF1REy/electron-workspace.git
+cd electron-workspace
+```
 
-Exemplo de comunicação IPC (Inter-Process Communication) no Electron, utilizando Vite para build e configuração modular.
-
-- **Principais arquivos:** `main.js`, `preload.js`, `renderer.js`, `vite.*.config.mjs`
-- **Recursos:** Demonstração de IPC, estrutura moderna com Vite.
-
-## meu-hello-electron
-
-Projeto simples de "Hello World" com Electron, ideal para iniciantes.
-
-- **Principais arquivos:** `main.js`, `preload.js`, `index.html`
-- **Recursos:** Estrutura básica, fácil de entender.
-
-## my-clock-app
-
-Aplicativo de relógio digital feito com Electron.
-
-- **Principais arquivos:** `main.js`, `preload.js`, `renderer/scripts/script.js`, `renderer/styles/style.css`
-- **Recursos:** Exibe relógio em tempo real, interface simples.
-
-## my-electron-app
-
-Template básico para aplicações Electron, com configuração Forge.
-
-- **Principais arquivos:** `main.js`, `preload.js`, `renderer.js`, `forge.config.js`
-- **Recursos:** Estrutura inicial para novos projetos.
-
-## my-note-app
-
-Aplicativo de notas com Electron.
-
-- **Principais arquivos:** `main.js`, `preload.js`, `src/index.html`, `src/script.js`, `src/main.css`
-- **Recursos:** Criação e edição de notas, interface simples.
-
-## my-pomodoro-app
-
-Aplicativo Pomodoro com React e Electron, focado em produtividade.
-
-- **Principais arquivos:** `main.js`, `preload.js`, `src/App.tsx`, `src/index.tsx`, `public/index.html`
-- **Recursos:** Timer Pomodoro, interface moderna, assets personalizados.
-
-## neo-browser
-
-Navegador simples feito com Electron e Vite.
-
-- **Principais arquivos:** `main.js`, `preload.js`, `renderer.js`, `vite.*.config.mjs`
-- **Recursos:** Estrutura de navegador, configuração modular.
-
-## pressound
-
-Aplicativo de sons com Electron, focado em efeitos sonoros e interface visual.
-
-- **Principais arquivos:** `main.js`, `src/renderer.js`, `src/index.html`, `src/assets/sounds/`
-- **Recursos:** Biblioteca de sons, interface visual, organização por categorias.
-
-## react-vite-starter
-
-Template para projetos React com Electron e Vite.
-
-- **Principais arquivos:** `main.js`, `preload.js`, `src/renderer.jsx`, `vite.*.config.mjs`
-- **Recursos:** Estrutura pronta para React + Electron + Vite.
-
-## resonus
-
-Aplicativo multimídia com Electron e TypeScript, usando Webpack.
-
-- **Principais arquivos:** `app.tsx`, `index.ts`, `webpack.*.ts`, `assets/`
-- **Recursos:** Interface multimídia, tipagem forte, configuração avançada.
-
-## screen-capturer
-
-Ferramenta simples para captura de tela com Electron.
-
-- **Principais arquivos:** `main.js`, `assets/capture.*`
-- **Recursos:** Captura de tela, ícones customizados.
-
-## tuturu-timer
-
-Timer com interface customizada, feito com Electron e React, usando Tailwind para estilos.
-
-- **Principais arquivos:** `electron.vite.config.mjs`, `src/renderer/src/App.jsx`, `src/renderer/src/main.jsx`, `src/renderer/src/assets/main.css`
-- **Recursos:** Timer customizado, interface moderna, assets visuais e sonoros.
-
-## user-lite
-
-Aplicativo de gerenciamento de usuários simples com Electron.
-
-- **Principais arquivos:** `main.js`, `preload.js`, `renderer/index.html`, `database/database.js`
-- **Recursos:** Gerenciamento de usuários, interface básica, persistência local.
-
----
-
-## Como executar os projetos
+## ⚙️ Como executar os projetos <a name="como-executar"></a>
 
 Cada projeto possui seu próprio `package.json` e pode ser executado individualmente. Para rodar um projeto:
 
 ```bash
-cd <nome-do-projeto>
+cd src/nome-do-projeto
 npm install
 npm start
 ```
 
-Consulte o README específico de cada projeto (se houver) para instruções detalhadas.
-
-## 👤 Sobre o Desenvolvedor
+## 👤 Sobre o Desenvolvedor <a name="sobre-o-desenvolvedor"></a>
 
 <div align="center">
 
@@ -153,7 +70,7 @@ Consulte o README específico de cada projeto (se houver) para instruções deta
     <td align="center">
         <br>
         <a href="https://github.com/0nF1REy" target="_blank">
-          <img src="./readme_images/alan-ryan.jpg" height="160" alt="Foto de Alan Ryan" style="border-radius:50%;border:3px solid #0077B5;">
+          <img src="./resources/images/docs/alan-ryan.jpg" height="160" alt="Foto de Alan Ryan">
         </a>
         </p>
         <a href="https://github.com/0nF1REy" target="_blank">
@@ -184,39 +101,13 @@ Consulte o README específico de cada projeto (se houver) para instruções deta
 
 ---
 
-## 📫 Contribuir
+## 📚 Recursos Adicionais <a name="recursos-adicionais"></a>
 
-Contribuições são muito bem-vindas! Se você deseja contribuir com o projeto, por favor, siga estes passos:
+- [Documentação Oficial do Electron](https://www.electronjs.org/docs/latest)
+- [Guia de Segurança do Electron](https://www.electronjs.org/docs/latest/tutorial/security)
+- [Electron Forge – Ferramenta de Build e Empacotamento](https://www.electronforge.io/)
 
-1.  **Faça um Fork** do repositório.
-
-2.  **Crie uma nova Branch** para sua feature ou correção:
-
-    ```bash
-    git checkout -b feature/nome-da-feature
-    ```
-
-3.  **Faça suas alterações** e realize o commit:
-
-    ```bash
-    git commit -m "feat: Adiciona nova feature"
-    ```
-
-4.  **Envie suas alterações** para o seu fork:
-
-    ```bash
-    git push origin feature/nome-da-feature
-    ```
-
-5.  **Abra um pull request** para a branch `main` do repositório original.
-
-## 📚 Recursos Adicionais
-
-- **<a href="https://www.atlassian.com/br/git/tutorials/making-a-pull-request" target="_blank">📝 Como criar um Pull Request</a>**
-
-- **<a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank">💾 Padrão de Commits Convencionais</a>**
-
-## 📜 Licença
+## 📜 Licença <a name="licenca"></a>
 
 Este projeto está sob a **licença MIT**. Consulte o arquivo **[LICENSE](LICENSE)** para obter mais detalhes.
 
