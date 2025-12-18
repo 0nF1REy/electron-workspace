@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>Hello World!</title>
-
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <div id="counter">0</div>
+    <button id="default">Click me</button>
+    <button id="main-thread">Work on main thread</button>
+    <button id="worker-thread">Work on worker thread</button>
     <script type="module" src="/src/renderer.ts"></script>
   </body>
 </html>
