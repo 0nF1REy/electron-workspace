@@ -20,7 +20,7 @@ builder.Services.AddSingleton<IFilesService, FilesService>();
 var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "meu_app_blazor.db");
 
 // Registra o Contexto do Banco de Dados
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>
     options.UseSqlite($"Data Source={databasePath}"));
 
 var app = builder.Build();
