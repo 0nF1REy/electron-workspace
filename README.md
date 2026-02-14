@@ -1,10 +1,10 @@
-<h1 align="center">
-   Electron - Workspace 
-</h1>
+<p align="center">
+    <img src="./resources/images/docs/logotypes/electron-workspace.png" width="150" alt="Logotipo — Electron Workspace" />
+</p>
 
 <div align="center">
 
-![Maintenance](https://img.shields.io/maintenance/yes/2025?style=for-the-badge)
+![Maintenance](https://img.shields.io/maintenance/yes/2026?style=for-the-badge)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 
 </div>
@@ -19,28 +19,30 @@
 - **[📚 Recursos Adicionais](#recursos-adicionais)**
 - **[📜 Licença](#licenca)**
 
+## Electron Workspace
+
 ## 📖 Descrição <a name="descricao"></a>
 
 Este repositório contém diversas aplicações desenvolvidos com Electron, cada um com propósitos e tecnologias variadas.
 
 ## 🚀 Projetos <a name="projetos"></a>
 
-|  |
-|--------|
-| image-resizer |
-| ipc |
+|                    |
+| ------------------ |
+| image-resizer      |
+| ipc                |
 | meu-hello-electron |
-| my-clock-app |
-| my-electron-app |
-| my-note-app |
-| my-pomodoro-app |
-| neo-browser |
-| pressound |
+| my-clock-app       |
+| my-electron-app    |
+| my-note-app        |
+| my-pomodoro-app    |
+| neo-browser        |
+| pressound          |
 | react-vite-starter |
-| resonus |
-| screen-capturer |
-| tuturu-timer |
-| user-lite |
+| resonus            |
+| screen-capturer    |
+| tuturu-timer       |
+| user-lite          |
 
 ## 📥 Clonar o Repositório <a name="clonar-repositorio"></a>
 
@@ -56,21 +58,19 @@ cd electron-workspace
 Cada projeto possui seu próprio `package.json` e pode ser executado individualmente. Para rodar um projeto:
 
 ```bash
-cd src/nome-do-projeto
+cd projects/nome-do-projeto
 npm install
 npm start
 ```
 
 ## 👤 Sobre o Desenvolvedor <a name="sobre-o-desenvolvedor"></a>
 
-<div align="center">
-
-<table>
+<table align="center">
   <tr>
     <td align="center">
         <br>
         <a href="https://github.com/0nF1REy" target="_blank">
-          <img src="./resources/images/docs/alan-ryan.jpg" height="160" alt="Foto de Alan Ryan">
+          <img src="./resources/images/docs/developer/alan-ryan.jpg" height="160" alt="Foto — Alan Ryan">
         </a>
         </p>
         <a href="https://github.com/0nF1REy" target="_blank">
@@ -111,6 +111,6 @@ npm start
 
 Este projeto está sob a **licença MIT**. Consulte o arquivo **[LICENSE](LICENSE)** para obter mais detalhes.
 
-> ℹ️ **Aviso de Licença:** © 2025 Alan Ryan da Silva Domingues. Este projeto está licenciado sob os termos da licença MIT. Isso significa que você pode usá-lo, copiá-lo, modificá-lo e distribuí-lo com liberdade, desde que mantenha os avisos de copyright.
+> ℹ️ **Aviso de Licença:** &copy; 2025-2026 Alan Ryan da Silva Domingues. Este projeto está licenciado sob os termos da licença MIT. Isso significa que você pode usá-lo, copiá-lo, modificá-lo e distribuí-lo com liberdade, desde que mantenha os avisos de copyright.
 
 ⭐ Se este repositório foi útil para você, considere dar uma estrela!
