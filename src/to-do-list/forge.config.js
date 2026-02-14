@@ -4,6 +4,14 @@ const { FuseV1Options, FuseVersion } = require("@electron/fuses");
 module.exports = {
   packagerConfig: {
     asar: true,
+    prune: true,
+    icon: "icon",
+    ignore: (file) => {
+      if (!file) return false;
+      const keep =
+        file.startsWith("/.vite") || file.startsWith("/node_modules");
+      return !keep;
+    },
   },
   rebuildConfig: {},
   makers: [
