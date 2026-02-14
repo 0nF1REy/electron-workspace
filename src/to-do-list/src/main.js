@@ -2,8 +2,9 @@ import { app, BrowserWindow } from "electron";
 import path from "node:path";
 import started from "electron-squirrel-startup";
 import AppDatabase from "./db/database";
+import setUpHandlers from "./db/ipcHandlers";
 
-let db
+let db;
 
 if (started) {
   app.quit();
@@ -33,6 +34,7 @@ const createWindow = () => {
 app.whenReady().then(() => {
   db = new AppDatabase();
   db.setUpDataBase();
+  setUpHandlers(db);
   createWindow();
 
   app.on("activate", () => {
@@ -43,6 +45,7 @@ app.whenReady().then(() => {
 });
 
 app.on("window-all-closed", () => {
+  db.close();
   if (process.platform !== "darwin") {
     app.quit();
   }

@@ -19,7 +19,34 @@ class AppDatabase {
       )
     `);
 
-    console.log("db inicializado!");
+    console.log("Banco de dados inicializado.");
+  }
+  addTask(title) {
+    const stmt = this.db.prepare("INSERT INTO tasks (title) VALUES (?)");
+    const info = stmt.run(title);
+    return {
+      id: info.lastInsertRowid,
+      title: title,
+      completed: 0,
+    };
+  }
+  deleteTask(id) {
+    const stmt = this.db.prepare("DELETE FROM tasks WHERE id = ?");
+    const info = stmt.run(id);
+    return info.changes > 0;
+  }
+  markComplete({ id, completed }) {
+    const stmt = this.db.prepare("UPDATE tasks SET completed = ? WHERE id = ?");
+    const info = stmt.run(completed, id);
+    return info.changes > 0;
+  }
+  getAllTasks() {
+    const stmt = this.db.prepare("SELECT * FROM tasks ORDER BY id DESC");
+    return stmt.all();
+  }
+  close() {
+    this.db.close();
+    console.log("Conexão com o banco de dados encerrada.");
   }
 }
 
