@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu } from "electron";
 import path from "node:path";
 import started from "electron-squirrel-startup";
 import AppDatabase from "./db/database";
@@ -12,8 +12,8 @@ if (started) {
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 400,
+    height: 300,
     alwaysOnTop: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -28,10 +28,12 @@ const createWindow = () => {
     );
   }
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 };
 
 app.whenReady().then(() => {
+  Menu.setApplicationMenu(null);
+
   db = new AppDatabase();
   db.setUpDataBase();
   setUpHandlers(db);
