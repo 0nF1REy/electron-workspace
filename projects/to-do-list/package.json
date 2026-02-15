@@ -1,8 +1,8 @@
 {
   "name": "to-do-list",
   "productName": "to-do-list",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "version": "1.1.0",
+  "description": "A cross-platform Electron-based to-do list app with persistent storage, built using Vite and SQLite for efficient task management.",
   "main": ".vite/build/main.js",
   "private": true,
   "scripts": {
@@ -12,10 +12,26 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
-  "keywords": [],
+  "keywords": [
+    "electron",
+    "to-do list",
+    "task manager",
+    "productivity",
+    "desktop app",
+    "sqlite",
+    "vite",
+    "cross-platform"
+  ],
   "author": {
     "name": "Alan Ryan da Silva Domingues",
     "email": "alanryan619@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0nF1REy/electron-workspace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0nF1REy/electron-workspace/issues"
   },
   "license": "MIT",
   "devDependencies": {
